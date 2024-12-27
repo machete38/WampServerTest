@@ -23,7 +23,8 @@ class AuthRepository @Inject constructor(
                     val userJson = jsonObject.getJSONObject("user")
                     User(
                         id = userJson.getString("id"),
-                        name = userJson.getString("name")
+                        name = userJson.getString("name"),
+                        role = userJson.getInt("role")
                     )
                 } else {
                     throw Exception(jsonObject.getString("message"))
@@ -39,3 +40,4 @@ class AuthRepository @Inject constructor(
         }
     }
 }
+

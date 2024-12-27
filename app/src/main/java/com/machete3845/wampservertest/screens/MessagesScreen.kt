@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import com.machete3845.wampservertest.data.Message
+import com.machete3845.wampservertest.utils.UserSession
 import com.machete3845.wampservertest.viewModels.MessagesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -125,10 +126,16 @@ fun MessageItem(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            Text(
-                text = message.username ?: "Unknown User",
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row{
+                Text(
+                    text = message.username ?: "Unknown User",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Spacer(modifier = Modifier.width(30.dp))
+                Text(text = UserSession.pickRole(message.role) ?: "Unknown Role",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = message.msg ?: "No message",

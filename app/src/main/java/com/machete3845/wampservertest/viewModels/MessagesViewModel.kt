@@ -2,7 +2,7 @@ package com.machete3845.wampservertest.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.machete3845.wampservertest.apis.MessageApi
+import com.machete3845.wampservertest.apis.MessagesApi
 import com.machete3845.wampservertest.data.Message
 import com.machete3845.wampservertest.utils.UserSession
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MessagesViewModel @Inject constructor(
-    private val messageApi: MessageApi,
+    private val messageApi: MessagesApi,
     private val userSession: UserSession
 ) : ViewModel() {
     private val _messages = MutableStateFlow<List<Message>>(emptyList())

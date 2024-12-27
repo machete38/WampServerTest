@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.machete3845.wampservertest.ServiceDetail
 import com.machete3845.wampservertest.ServiceItem
+import com.machete3845.wampservertest.utils.UserSession
 import com.machete3845.wampservertest.viewModels.CatalogViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,6 +40,7 @@ fun CatalogScreen(
     var selectedService by remember { mutableStateOf<Service?>(null) }
     var showAddDialog by remember { mutableStateOf(false) }
     var serviceToDelete by remember { mutableStateOf<Service?>(null) }
+    val role by UserSession.role.collectAsState()
 
     Scaffold(
         topBar = {
@@ -50,8 +52,12 @@ fun CatalogScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { showAddDialog = true }) {
-                        Icon(Icons.Filled.Add, contentDescription = "Add Service")
+                    role.let {
+                        if (it == 1 || it == 2) {
+                            IconButton(onClick = { showAddDialog = true }) {
+                                Icon(Icons.Filled.Add, contentDescription = "Add Service")
+                            }
+                        }
                     }
                 }
             )
@@ -83,6 +89,7 @@ fun CatalogScreen(
                         key = { it.id }
                     ) { service ->
                         ServiceItem(
+                            role = role,
                             service = service,
                             onClick = { selectedService = service },
                             onDelete = { serviceToDelete = service }
@@ -158,28 +165,28 @@ fun AddServiceDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Add New Service") },
+        title = { Text("Добавить новую услугу") },
         text = {
             Column {
                 TextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Name") }
+                    label = { Text("Название услуги") }
                 )
                 TextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("Description") }
+                    label = { Text("Описание") }
                 )
                 TextField(
                     value = sla,
                     onValueChange = { sla = it },
-                    label = { Text("SLA") }
+                    label = { Text("Линия услуги") }
                 )
                 TextField(
                     value = price,
                     onValueChange = { price = it },
-                    label = { Text("Price") }
+                    label = { Text("Цена") }
                 )
             }
         },

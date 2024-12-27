@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.machete3845.wampservertest.repository.AuthRepository
 import com.machete3845.wampservertest.utils.UserSession
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,6 +24,7 @@ fun HomeScreen(
     onNavigateToIncidents: () -> Unit
 ) {
     val username by UserSession.username.collectAsState()
+    val role by UserSession.role.collectAsState()
 
     Scaffold(
         topBar = {
@@ -44,10 +46,18 @@ fun HomeScreen(
                     "Добро пожаловать, ${it}!",
                     style = MaterialTheme.typography.headlineMedium,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(bottom = 32.dp)
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+            }
+            role?.let {
+                Text(
+                    "Ваша роль: ${UserSession.pickRole(it)}",
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
                 )
             }
 
+            Spacer(modifier = Modifier.height(32.dp))
 
             HomeButton(
                 icon = Icons.Default.Email,
@@ -73,6 +83,8 @@ fun HomeScreen(
         }
     }
 }
+
+
 
 @Composable
 fun HomeButton(

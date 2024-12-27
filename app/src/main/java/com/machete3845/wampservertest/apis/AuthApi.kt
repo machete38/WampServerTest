@@ -12,6 +12,8 @@ interface AuthApi {
         @POST("login.php")
         suspend fun login(
                 @Field("username") username: String,
-                @Field("password") password: String
+                @Field("password") password: String,
         ): Response<ResponseBody>
 }
+
+

@@ -9,6 +9,7 @@ android {
     namespace = "com.machete3845.wampservertest"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.machete3845.wampservertest"
         minSdk = 24
@@ -49,9 +50,15 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
 dependencies {
+    testImplementation(libs.mockk)
+    testImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation(libs.androidx.junit.v121)
+    androidTestImplementation(libs.androidx.espresso.core.v361)
+    implementation(libs.junit.v412)
     kapt(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation)
     implementation(libs.retrofit.android)

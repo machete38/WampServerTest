@@ -5,4 +5,5 @@ import java.util.*
 data class Message(
     val username: String,
     val msg: String,
+    val role: Int,
 )

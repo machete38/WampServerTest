@@ -25,6 +25,7 @@ class AuthViewModel @Inject constructor(
             try {
                 val result = authRepository.login(username, password)
                 UserSession.setUsername(result.name)
+                UserSession.setRole(result.role)
                 _authState.value = AuthState.Success(result)
             } catch (e: Exception) {
                 _authState.value = AuthState.Error(e.message ?: "Unknown error occurred")
@@ -40,4 +41,4 @@ sealed class AuthState {
     data class Error(val message: String) : AuthState()
 }
 
-data class User(val id: String, val name: String)
+data class User(val id: String, val name: String, val role: Int)

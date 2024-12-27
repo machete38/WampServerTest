@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import com.machete3845.wampservertest.api.AuthApi
 import com.machete3845.wampservertest.apis.IncidentApi
 import com.machete3845.wampservertest.apis.MainApi
-import com.machete3845.wampservertest.apis.MessageApi
+import com.machete3845.wampservertest.apis.MessagesApi
 import com.machete3845.wampservertest.apis.ServiceApi
 import com.machete3845.wampservertest.utils.UserSession
 import dagger.Module
@@ -31,7 +31,7 @@ object Module {
     @Singleton
     fun providesRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.10/host/")
+            .baseUrl("http://192.168.1.8/host/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -50,8 +50,8 @@ object Module {
 
     @Provides
     @Singleton
-    fun provideMessageApi(retrofit: Retrofit): MessageApi {
-        return retrofit.create(MessageApi::class.java)
+    fun provideMessageApi(retrofit: Retrofit): MessagesApi {
+        return retrofit.create(MessagesApi::class.java)
     }
 
     @Provides

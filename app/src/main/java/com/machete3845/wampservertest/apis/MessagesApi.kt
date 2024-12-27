@@ -7,7 +7,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface MessageApi {
+interface MessagesApi {
     @GET("get_messages.php")
     suspend fun getMessages(): Response<List<Message>>
 

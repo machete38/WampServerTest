@@ -3,6 +3,7 @@ package com.machete3845.wampservertest
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -21,6 +22,7 @@ import com.machete3845.wampservertest.screens.Service
 
 @Composable
 fun ServiceItem(
+    role: Int?,
     service: Service,
     onClick: () -> Unit,
     onDelete: () -> Unit
@@ -59,8 +61,12 @@ fun ServiceItem(
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-            IconButton(onClick = onDelete) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete")
+            role.let {
+                if (it == 1 ) {
+                    IconButton(onClick = onDelete) {
+                        Icon(Icons.Default.Delete, contentDescription = "Delete")
+                    }
+                }
             }
         }
     }
